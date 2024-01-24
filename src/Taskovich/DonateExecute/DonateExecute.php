@@ -7,6 +7,7 @@ use pocketmine\utils\Config;
 
 use Taskovich\DonateExecute\donationalerts\DonationAlertsSession;
 use Taskovich\DonateExecute\utils\Languages;
+use Taskovich\DonateExecute\task\CheckDonates;
 
 class DonateExecute extends PluginBase
 {
@@ -120,6 +121,7 @@ class DonateExecute extends PluginBase
 	private function initHandler(): void
 	{
 		new DonateHandler($this->last_donate_id);
+		$this->getScheduler()->scheduleRepeatingTask(new CheckDonates(), 20 * 10);
 	}
 
 }
