@@ -13,8 +13,11 @@ class DonateHandler {
 
 	public static function getLastDonateId(): int
 	{
-		var_dump(self::$last_donate_id);
-		return 0;
+		return self::$last_donate_id;
+	}
+
+	public static function execute(string $data): void {
+		
 	}
 
 }
