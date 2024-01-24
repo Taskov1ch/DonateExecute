@@ -2,22 +2,29 @@
 
 namespace Taskovich\DonateExecute\donationalerts;
 
-class DonationAlertsSession extends Requests
+class DonationAlertsSession
 {
+
+	/**
+	 * @var string
+	 */
+	private static string $token = "";
 
 	/**
 	 * @param string $token
 	 */
-	public function __construct(private string $token) {}
+	public function __construct(string $token) {
+		self::$token = $token;
+	}
 
 	/**
 	 * @param bool $array (optional) 
 	 * @return string|array|false
 	 */
-	public function getDonationList(bool $in_array = true): string|array|false
+	public static function getDonationList(bool $in_array = true): string|array|false
 	{
 		$url = "https://www.donationalerts.com/api/v1/alerts/donations";
-		$response = $this->get($url, ["Authorization: Bearer " . $this->token]);
+		$response = Requests::get($url, ["Authorization: Bearer " . self::$token]);
 
 		if(!$response)
 			return false;

@@ -6,6 +6,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 
 use Taskovich\DonateExecute\donationalerts\DonationAlertsSession;
+use Taskovich\DonateExecute\utils\Languages;
 
 class DonateExecute extends PluginBase
 {
@@ -16,9 +17,19 @@ class DonateExecute extends PluginBase
 	private ?DonationAlertsSession $das;
 
 	/**
+	 * @var Config
+	 */
+	private ?Config $config;
+
+	/**
 	 * @var array
 	 */
 	private array $env = [];
+
+	/**
+	 * @var int
+	 */
+	private int $last_donate_id = 0;
 
 	/**
 	 * @return void
@@ -28,7 +39,8 @@ class DonateExecute extends PluginBase
 		if((!$this->loadConfigs()) or (!$this->initDas()))
 			return;
 
-		
+		$this->loadLang();
+		$this->initHandler();
 	}
 
 	/**
@@ -58,7 +70,7 @@ class DonateExecute extends PluginBase
 		$env_lines = explode("\n", $env_content);
 
 		foreach($env_lines as $line) {
-			if(!empty($line) && strpos($line, "=") !== false && $line[0] !== "#") {
+			if(!empty($line) and strpos($line, "=") !== false and $line[0] !== "#") {
 				list($key, $value) = explode("=", $line, 2);
 				$key = trim($key);
 				$value = trim($value);
@@ -66,8 +78,8 @@ class DonateExecute extends PluginBase
 			}
 		}
 
-		@mkdir($this->getDataFolder());
-		$test = new Config($this->getDataFolder() . "testing.yml", Config::YAML);
+		$this->saveResource("config.yml");
+		$this->config = new Config($this->getDataFolder() . "config.yml");
 
 		return true;
 	}
@@ -78,14 +90,36 @@ class DonateExecute extends PluginBase
 	private function initDas(): bool
 	{
 		$this->das = new DonationAlertsSession($this->env["token"]);
-		$test = $this->das->getDonationList();
+		$test = DonationAlertsSession::getDonationList();
 
 		if(!$test) {
 			$this->getLogger()->error("Token verification failed");
 			return false;
 		}
 
+		$this->last_donate_id = $test["data"][0]["id"];
 		return true;
+	}
+
+	/**
+	 * @return void
+	 */
+	private function loadLang(): void
+	{
+
+		$lang_config = $this->config->get("lang") . ".yml";
+		$this->saveResource($lang_config);
+		new Languages(
+			(new Config($this->getDataFolder() . $lang_config, Config::YAML))->getAll()
+		);
+	}
+
+	/**
+	 * @return void
+	 */
+	private function initHandler(): void
+	{
+		new DonateHandler($this->last_donate_id);
 	}
 
 }
