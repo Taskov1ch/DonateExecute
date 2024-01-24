@@ -1,0 +1,4 @@
+name: DonateExecute
+version: 0.2
+api: 5.0.0
+main: Taskovich\DonateExecute\DonateExecute
