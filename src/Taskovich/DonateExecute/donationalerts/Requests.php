@@ -10,7 +10,7 @@ class Requests
 	 * @param array $headers (optional)
 	 * @return string|false
 	 */
-	public function get(string $url, array $headers = []): string|false
+	public static function get(string $url, array $headers = []): string|false
 	{
 		$ch = curl_init($url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
