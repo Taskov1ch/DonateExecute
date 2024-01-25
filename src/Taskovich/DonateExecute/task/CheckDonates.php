@@ -2,15 +2,21 @@
 
 namespace Taskovich\DonateExecute\task;
 
+use pocketmine\Server;
 use pocketmine\scheduler\Task;
-use Taskovich\DonateExecute\DonateExecute;
 
-class CheckDonates extends Task {
+class CheckDonates extends Task
+{
 
-	public function __construct() {}
+	public function __construct(
+		private string $token
+	) {}
 
-	public function onRun(): void {
-		Server::getInstance()->getAsyncPool()->submitTask(new AsyncCheckDonates($this->main));
+	public function onRun(): void
+	{
+		Server::getInstance()->getAsyncPool()->submitTask(
+			new AsyncCheckDonates($this->token)
+		);
 	}
 
 }

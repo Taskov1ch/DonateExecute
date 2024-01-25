@@ -2,22 +2,14 @@
 
 namespace Taskovich\DonateExecute;
 
-class DonateHandler {
+use Taskovich\DonateExecute\utils\DonatesInfo;
 
-	public static int $last_donate_id = 0;
+class DonateHandler
+{
 
-	public function __construct(int $id)
+	public static function execute()
 	{
-		self::$last_donate_id = $id;
-	}
-
-	public static function getLastDonateId(): int
-	{
-		return self::$last_donate_id;
-	}
-
-	public static function execute(string $data): void {
-		
+		var_dump(DonatesInfo::$last_donate_id);
 	}
 
 }
