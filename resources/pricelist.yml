@@ -1,0 +1,5 @@
+1RUB:
+  - "kick {player} 1 рубль на кик"
+
+10RUB:
+  - "kill {player}"

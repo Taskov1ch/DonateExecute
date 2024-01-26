@@ -1,0 +1,7 @@
+loader.env_not_found: "The .env configuration file was not found"
+loader.token_failed: "The token failed verification"
+
+command.enable_donates: "Donation acceptance is enabled"
+command.disable_donates: "Donation acceptance is disabled"
+
+notice.null: "..."

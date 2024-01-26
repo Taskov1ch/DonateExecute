@@ -1,6 +1,6 @@
 <?php
 
-namespace Taskovich\DonateExecute\network;
+namespace Taskovich\DonateExecute\donationalerts;
 
 class DaRequests
 {
