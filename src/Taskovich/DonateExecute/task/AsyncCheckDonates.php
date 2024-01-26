@@ -4,8 +4,9 @@ namespace Taskovich\DonateExecute\task;
 
 use pocketmine\scheduler\AsyncTask;
 
-use Taskovich\DonateExecute\network\DaRequests;
+use Taskovich\DonateExecute\donationalerts\DaRequests;
 use Taskovich\DonateExecute\DonateHandler;
+use Taskovich\DonateExecute\utils\DonatesInfo;
 
 class AsyncCheckDonates extends AsyncTask
 {
@@ -21,7 +22,10 @@ class AsyncCheckDonates extends AsyncTask
 
 	public function onCompletion(): void
 	{
-		DonateHandler::execute();
+		if(!DonatesInfo::checkDonate($this->data))
+			return;
+		
+		DonateHandler::execute($this->data);
 	}
 
 }

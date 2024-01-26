@@ -1,5 +1,5 @@
 # Language configuration file (no extension)
-lang: en_EN
+lang: en_US
 
 # Players on whom donations will be valid
 allowed_players:
@@ -16,12 +16,12 @@ notice:
   default:
     title: "{username}"
     subtitle: "{amount} {currency}"
-    tip: ""
+    actionbar: ""
     message: "{username}: {message}"
 
   # But you can also customize sound and texts for certain price tags (<amount> + <currency>)
   100RUB:
     title: "+ {username} +"
     subtitle: "{amount} {currency}"
-    tip: ""
+    actionbar: ""
     message: "{username} (VIP): {message}"

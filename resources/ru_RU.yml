@@ -1,2 +1,7 @@
+loader.env_not_found: "Конфигурационный файл .env не найден"
+loader.token_failed: "Токен не прошел проверку"
+
 command.enable_donates: "Прием донатов включен"
 command.disable_donates: "Примем донатов выключен"
+
+notice.null: "..."
