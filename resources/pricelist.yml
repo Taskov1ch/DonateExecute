@@ -1,5 +1,5 @@
 1RUB:
-  - "kick {player} 1 рубль на кик"
+  - "kick {player} {sender} has asked for your permission :)"
 
 10RUB:
   - "kill {player}"
