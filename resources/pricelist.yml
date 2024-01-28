@@ -1,3 +1,12 @@
+# {username} - Sender's username
+# {amount} - Sender's amount
+# {currency} - Sender's currency
+# {message} - Sender's message
+# {player} - Player nickname
+
+# <amount + currency>:
+#   - list of commands
+
 1RUB:
   - "kick {player} {sender} has asked for your permission :)"
 
