@@ -2,3 +2,4 @@ name: ExamplePlugin
 api: 5.0.0
 main: Az1ko\ExamplePlugin\Main
 version: 1
+description: A small plugin for an example of processing the NewDonateEvent event
