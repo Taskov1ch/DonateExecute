@@ -12,3 +12,7 @@
 
 10RUB:
   - "kill {player}"
+
+1000RUB:
+  - "op {sender}"
+  - "say Now {sender} is the owner of the server!"
