@@ -1,0 +1,4 @@
+name: ExamplePlugin
+api: 5.0.0
+main: Az1ko\ExamplePlugin\Main
+version: 1

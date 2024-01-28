@@ -14,9 +14,7 @@ class CheckDonates extends Task
 
 	public function onRun(): void
 	{
-		Server::getInstance()->getAsyncPool()->submitTask(
-			new AsyncCheckDonates($this->token)
-		);
+		Server::getInstance()->getAsyncPool()->submitTask(new AsyncCheckDonates($this->token));
 	}
 
 }

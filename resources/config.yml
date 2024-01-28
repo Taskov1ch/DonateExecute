@@ -3,14 +3,16 @@ lang: en_US
 
 # Players on whom donations will be valid
 allowed_players:
-  - TynaevBE
-  - Az1koBE
+  - tynaevbe
+  - az1kobe
 
 # {username} - Sender's username
 # {amount} - Sender's amount
 # {currency} - Sender's currency
 # {message} - Sender's message
 notice:
+
+  enable: true
 
   # "default" will be used by default
   default:
