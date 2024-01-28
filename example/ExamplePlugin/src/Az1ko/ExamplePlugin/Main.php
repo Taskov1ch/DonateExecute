@@ -22,7 +22,7 @@ class Main extends PluginBase implements Listener {
 			"Message: " . $event->getAllData()["message"] ?? "idk :)"
 		);
 
-		// $event->cancel();
+		$event->cancel(); // Cancellation of the event will lead to the cancellation of the actions for the donation
 	}
 
 }
