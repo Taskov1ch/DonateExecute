@@ -2,7 +2,8 @@
 
 namespace Taskovich\DonateExecute\utils;
 
-class Language {
+class Language
+{
 
 	/**
 	 * @var string[]
