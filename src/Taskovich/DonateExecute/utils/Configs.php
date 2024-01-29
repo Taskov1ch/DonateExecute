@@ -23,7 +23,7 @@ class Configs
 	 * @param Config $config 
 	 * @return void
 	 */
-	public static function init(Config $config, Config $pricelist): void
+	public function __construct(Config $config, Config $pricelist)
 	{
 		self::$config = $config;
 		self::$pricelist = $pricelist;

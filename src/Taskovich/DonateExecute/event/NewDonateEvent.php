@@ -8,7 +8,8 @@ use pocketmine\event\Event;
 use pocketmine\event\Cancellable;
 use pocketmine\event\CancellableTrait;
 
-class NewDonateEvent extends Event implements Cancellable {
+class NewDonateEvent extends Event implements Cancellable
+{
 
 	use CancellableTrait;
 
@@ -57,6 +58,15 @@ class NewDonateEvent extends Event implements Cancellable {
 	public function getId(): int
 	{
 		return $this->data["id"];
+	}
+
+	/**
+	 * @return string|null
+	 */
+	public function getMessage(): ?string
+	{
+		return null;
+		// return $this->data["message"] ?? null;
 	}
 
 }
