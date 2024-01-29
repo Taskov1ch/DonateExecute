@@ -2,6 +2,10 @@
 
 namespace Taskovich\DonateExecute;
 
+use pocketmine\player\Player;
+use pocketmine\Server;
+use pocketmine\console\ConsoleCommandSender;
+
 use Taskovich\DonateExecute\utils\DonatesInfo;
 use Taskovich\DonateExecute\utils\Configs;
 use Taskovich\DonateExecute\utils\Language;
@@ -28,15 +32,19 @@ class DonateHandler
 		$amount = strval($data["amount"]) . $data["currency"];
 		$donate = Configs::getPriceList()->get($amount);
 
-		if(!$donate)
+		if($donate === null)
 			return;
 
 		$notices = Configs::getConfig()->get("notice");
 
 		if($notices["enable"]) {
 			$notices = self::formatter($notices[$amount] ?? $notices["default"], $data);
+			$commands = [
+				self::formatter($donate["by_player"], $data),
+				self::formatter($donate["by_console"], $data)
+			];
 
-			foreach(Players::getPlayers() as $name => $player)
+			foreach(Players::getPlayers() as $name => $player) {
 				foreach($notices as $type => $notice)
 					match($type) {
 						"title" => $player->sendTitle($notice, 20, 60, 20),
@@ -44,21 +52,37 @@ class DonateHandler
 						"actionbar" => $player->sendActionBarMessage($notice),
 						"message" => $player->sendMessage($notice),
 					};
+
+				foreach($commands[0] as $command) {
+					$command = str_replace("{player}", $player->getName(), $command);
+					Server::getInstance()->dispatchCommand($player, $command);
+				}
+
+				foreach($commands[1] as $command) {
+					$command = str_replace("{player}", $player->getName(), $command);
+					Server::getInstance()->dispatchCommand(
+						new ConsoleCommandSender(
+							Server::getInstance(),
+							Server::getInstance()->getLanguage()
+						),
+						$command
+					);
+				}
+			}
 		}
 
-		// TODO COMMANDS
 	}
 
 	/**
-	 * @param string[] $notices 
+	 * @param string[] $strings 
 	 * @return string[]
 	 */
-	private static function formatter(array $notices, array $data): array
+	private static function formatter(array $strings, array $data): array
 	{
-		foreach($notices as $type => $notice)
-			$notices[$type] = str_replace(
+		foreach($strings as $type => $string)
+			$strings[$type] = str_replace(
 				[
-					"{username}",
+					"{sender}",
 					"{amount}",
 					"{currency}",
 					"{message}"
@@ -69,10 +93,10 @@ class DonateHandler
 					$data["currency"],
 					$data["message"] ?? Language::translate("notice.null")
 				],
-				$notice
+				$string
 			);
 
-		return $notices;
+		return $strings;
 	}
 
 }

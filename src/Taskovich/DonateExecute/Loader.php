@@ -57,12 +57,12 @@ class Loader extends PluginBase
 		DonatesInfo::updateLastDonate($test["data"][0]);
 
 		$this->saveResource("pricelist.yml");
-		Configs::init(
+		new Configs(
 			$config,
 			new Config($this->getDataFolder() . "pricelist.yml")
 		);
 
-		$this->getScheduler()->scheduleRepeatingTask(new CheckDonates($token), 20 * 10);
+		$this->getScheduler()->scheduleRepeatingTask(new CheckDonates($token), 20 * 5);
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
 
 	}

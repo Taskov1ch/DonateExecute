@@ -6,7 +6,7 @@ allowed_players:
   - tynaevbe
   - az1kobe
 
-# {username} - Sender's username
+# {sender} - Sender's username
 # {amount} - Sender's amount
 # {currency} - Sender's currency
 # {message} - Sender's message
@@ -16,14 +16,14 @@ notice:
 
   # "default" will be used by default
   default:
-    title: "{username}"
+    title: "{sender}"
     subtitle: "{amount} {currency}"
     actionbar: ""
-    message: "{username}: {message}"
+    message: "{sender}: {message}"
 
   # But you can also customize sound and texts for certain price tags (<amount> + <currency>)
   100RUB:
-    title: "+ {username} +"
+    title: "+ {sender} +"
     subtitle: "{amount} {currency}"
     actionbar: ""
-    message: "{username} (VIP): {message}"
+    message: "{sender} (VIP): {message}"

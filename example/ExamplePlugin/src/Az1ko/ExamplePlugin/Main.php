@@ -19,7 +19,7 @@ class Main extends PluginBase implements Listener {
 			"From: " . $event->getSenderName() . "\n" .
 			"Amount: " . $event->getAmount() . "\n" .
 			"Currency: " . $event->getCurrency() . "\n" .
-			"Message: " . $event->getAllData()["message"] ?? "idk :)"
+			"Message: " . $event->getMessage() ?? "idk :)"
 		);
 
 		$event->cancel(); // Cancellation of the event will lead to the cancellation of the actions for the donation
