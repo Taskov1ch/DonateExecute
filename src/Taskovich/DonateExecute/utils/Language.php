@@ -37,9 +37,8 @@ class Language
 		if(!$translate)
 			return null;
 
-		foreach($args as $key => $value) {
+		foreach($args as $key => $value)
 			$translate = str_replace($key, $value, $translate);
-		}
 
 		return $translate;
 	}
