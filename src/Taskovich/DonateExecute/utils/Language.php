@@ -28,10 +28,9 @@ class Language
 
 	/**
 	 * @param string $translatable 
-	 * @param array|null $args 
 	 * @return string|null
 	 */
-	public static function translate(string $translatable, array $args = []): ?string
+	public static function translate(string $translatable): ?string
 	{
 		$translate = self::$lang[$translatable] ?? false;
 
