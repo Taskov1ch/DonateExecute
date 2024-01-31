@@ -65,8 +65,7 @@ class NewDonateEvent extends Event implements Cancellable
 	 */
 	public function getMessage(): ?string
 	{
-		return null;
-		// return $this->data["message"] ?? null;
+		return $this->data["message"] ?? null;
 	}
 
 }
