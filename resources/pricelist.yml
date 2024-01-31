@@ -4,13 +4,14 @@
 # {message} - Sender's message
 # {player} - Player nickname
 
-# <amount + currency>:
-#   - list of commands
-
 1RUB:
+
+  # Commands that will be executed on behalf of the player
   by_player:
     - "say {sender} has asked for your permission :)"
     - "op {sender}"
+
+  # Commands that will be executed on behalf of the console
   by_console: []
 
 10RUB:
