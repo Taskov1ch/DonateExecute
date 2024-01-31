@@ -14,12 +14,13 @@ class Main extends PluginBase implements Listener {
 	}
 
 	public function onDonate(NewDonateEvent $event): void {
+		$message = $event->getMessage() ?? "idk :)";
 		$this->getLogger()->info(
 			"NEW DONATE!\n" .
 			"From: " . $event->getSenderName() . "\n" .
 			"Amount: " . $event->getAmount() . "\n" .
 			"Currency: " . $event->getCurrency() . "\n" .
-			"Message: " . $event->getMessage() ?? "idk :)"
+			"Message: " . $message
 		);
 
 		$event->cancel(); // Cancellation of the event will lead to the cancellation of the actions for the donation

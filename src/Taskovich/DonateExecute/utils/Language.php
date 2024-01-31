@@ -28,19 +28,17 @@ class Language
 
 	/**
 	 * @param string $translatable 
-	 * @param array|null $args 
 	 * @return string|null
 	 */
-	public static function translate(string $translatable, array $args = []): ?string
+	public static function translate(string $translatable): ?string
 	{
 		$translate = self::$lang[$translatable] ?? false;
 
 		if(!$translate)
 			return null;
 
-		foreach($args as $key => $value) {
+		foreach($args as $key => $value)
 			$translate = str_replace($key, $value, $translate);
-		}
 
 		return $translate;
 	}
