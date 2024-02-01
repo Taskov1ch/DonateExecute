@@ -1,5 +1,7 @@
 <p align="center">
-  <img width="70%" src="image.png" alt="Logo">
+  <picture>
+    <img src="image.png" alt="logo">
+  </picture>
   
   <p>Plugin for performing actions for donations</p>
 </p>
