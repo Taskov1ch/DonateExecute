@@ -5,7 +5,7 @@ namespace Az1ko\ExamplePlugin;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 
-use Taskovich\DonateExecute\event\NewDonateEvent;
+use Taskovich\DonateExecute\event\NewDonateEvent; // Importing the event class
 
 class Main extends PluginBase implements Listener {
 
@@ -13,7 +13,7 @@ class Main extends PluginBase implements Listener {
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
-	public function onDonate(NewDonateEvent $event): void {
+	public function onDonate(NewDonateEvent $event): void { // Processing the event
 		$message = $event->getMessage() ?? "idk :)";
 		$this->getLogger()->info(
 			"NEW DONATE!\n" .
