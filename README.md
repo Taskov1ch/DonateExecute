@@ -1,7 +1,9 @@
 <p align="center">
   <picture>
-    <img src="testing.png" alt="logo">
+    <img src="image.png" alt="logo">
   </picture>
-  
-  <p style="text-align: center">Plugin for performing actions for donations</p>
+  <br>
+  <span style="text-align: center">
+    <b>Plugin for performing actions for donations</b>
+  </span>
 </p>
