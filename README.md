@@ -1,6 +1,6 @@
 <p align="center">
   <picture>
-    <img src="logo.png" alt="logo">
+    <img src="testing.png" alt="logo">
   </picture>
   
   <p>Plugin for performing actions for donations</p>
