@@ -1,6 +1,6 @@
 <div align="center">
   <picture>
-    <img src="image.png" alt="image or gif">
+    <img src="title.png" alt="image or gif">
   </picture>
   <br>
   <b>Plugin for performing actions for donations</b>
