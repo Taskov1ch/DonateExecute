@@ -16,11 +16,18 @@ class DonateHandler
 {
 
 	/**
+	 * @var bool
+	 */
+	public static bool $cancel = true;
+
+	/**
 	 * @param string $donate_data 
 	 * @return void
 	 */
 	public static function execute(string $donate_data): void
 	{
+		if(self::$cancel)
+			return;
 		$data = json_decode($donate_data, true)["data"][0];
 
 		$event = new NewDonateEvent($data);
