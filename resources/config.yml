@@ -1,0 +1,29 @@
+# Language configuration file (no extension)
+lang: en_US
+
+# Players on whom donations will be valid
+allowed_players:
+  - tynaevbe
+  - az1kobe
+
+# {sender} - Sender's username
+# {amount} - Sender's amount
+# {currency} - Sender's currency
+# {message} - Sender's message
+notice:
+
+  enable: true
+
+  # "default" will be used by default
+  default:
+    title: "{sender}"
+    subtitle: "{amount} {currency}"
+    actionbar: ""
+    message: "{sender}: {message}"
+
+  # But you can also customize sound and texts for certain price tags (<amount> + <currency>)
+  100RUB:
+    title: "+ {sender} +"
+    subtitle: "{amount} {currency}"
+    actionbar: ""
+    message: "{sender} (VIP): {message}"

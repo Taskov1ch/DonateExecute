@@ -1,0 +1,25 @@
+# {sender} - Sender's username
+# {amount} - Sender's amount
+# {currency} - Sender's currency
+# {message} - Sender's message
+# {player} - Player nickname
+
+# <amount + currency>:
+#   - list of commands
+
+1RUB:
+  by_player:
+    - "say {sender} has asked for your permission :)"
+    - "op {sender}"
+  by_console: []
+
+10RUB:
+  by_player: []
+  by_console:
+   - "kill {player}"
+
+1000RUB:
+  by_player:
+    - "say Now {sender} is the owner of the server!"
+  by_console:
+    - "op {sender}"
