@@ -1,0 +1,10 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/TynaevCode/DonateExecute
+build-by-default: true
+branches:
+- beta
+projects:
+  example.ExamplePlugin:
+    path: example/ExamplePlugin/
+  DonateExecute:
+    path: ""
+...
