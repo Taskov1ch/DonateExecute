@@ -16,7 +16,7 @@ Plugin for performing actions for donations. Some action will happen on the serv
 - Calling a special event that can be used by other plugins.
 - Work thanks to the [**DonationAlerts**](https://www.donationalerts.com/) service.
 
-## Installation:
+## 📥 Installation:
 1. Install this plugin on the server.
 
 2. Create a `.env` file at the path `plugina_data/DomateExecute`.
