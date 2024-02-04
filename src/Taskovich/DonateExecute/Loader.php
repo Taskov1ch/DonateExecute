@@ -4,6 +4,7 @@ namespace Taskovich\DonateExecute;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
+use pocketmine\scheduler\TaskHandler;
 
 use Taskovich\DonateExecute\utils\Language;
 use Taskovich\DonateExecute\utils\Environment;
@@ -11,6 +12,8 @@ use Taskovich\DonateExecute\utils\DonatesInfo;
 use Taskovich\DonateExecute\utils\Configs;
 use Taskovich\DonateExecute\donationalerts\DaRequests;
 use Taskovich\DonateExecute\task\CheckDonates;
+use Taskovich\DonateExecute\command\AllowDonates;
+use Taskovich\DonateExecute\DonateHandler;
 
 class Loader extends PluginBase
 {
@@ -18,7 +21,7 @@ class Loader extends PluginBase
 	/**
 	 * @var mixed[]
 	 */
-	private $env;
+	private array $env = [];
 
 	/**
 	 * @return void
@@ -70,9 +73,12 @@ class Loader extends PluginBase
 			new Config($this->getDataFolder() . "pricelist.yml")
 		);
 
+		$map = $this->getServer()->getCommandMap();
+		$map->register("DonateExecute", new AllowDonates($this));
+
+		DonateHandler::$cancel = false;
 		$this->getScheduler()->scheduleRepeatingTask(new CheckDonates($token), 20 * 5);
 		$this->getServer()->getPluginManager()->registerEvents(new EventListener(), $this);
-
 	}
 
 }

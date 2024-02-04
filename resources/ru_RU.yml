@@ -1,7 +1,8 @@
 loader.env_not_found: "Конфигурационный файл .env не найден"
 loader.token_failed: "Токен не прошел проверку"
 
-command.enable_donates: "Прием донатов включен"
-command.disable_donates: "Прием донатов выключен"
+command.allow.success: "Действия за донаты разрешены"
+command.disallow.success: "Действия за донаты запрешены"
+command.allow_or_disallow.description: "Разрешить или запретить действия за донаты"
 
 notice.null: "..."
