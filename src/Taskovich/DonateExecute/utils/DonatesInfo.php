@@ -35,8 +35,8 @@ class DonatesInfo
 	{
 		$data = json_decode($donate, true)["data"][0];
 
-		// if(self::getLastDonate()["id"] === $data["id"])
-		// 	return false;
+		if(self::getLastDonate()["id"] === $data["id"])
+			return false;
 
 		self::updateLastDonate($data);
 		return true;
