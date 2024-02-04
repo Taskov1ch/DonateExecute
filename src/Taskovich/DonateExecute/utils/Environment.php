@@ -28,6 +28,7 @@ class Environment
 	 */
 	public function __construct(array $path_options = [])
 	{
+		$this->status = false;
 		$env_files = array_merge($this->env_paths, $path_options);
 
 		foreach($env_files as $option) {
@@ -38,7 +39,6 @@ class Environment
 		}
 
 		if(isset($env_file)) {
-
 			$env_content = file_get_contents($env_file);
 			$env_lines = explode("\n", $env_content);
 
@@ -50,8 +50,8 @@ class Environment
 					$this->env[$key] = $value;
 				}
 			}
+			
 			$this->status = true;
-
 		}
 	}
 

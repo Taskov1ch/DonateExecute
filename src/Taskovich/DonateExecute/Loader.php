@@ -25,15 +25,23 @@ class Loader extends PluginBase
 	 */
 	public function onEnable(): void
 	{
-		$this->saveResource("config.yml");
-		$config = new Config($this->getDataFolder() . "config.yml");
+		$configs = array_diff(scandir($this->getResourceFolder()), [".", ".."]);
 
-		$lang_config = $config->get("lang") . ".yml";
-		$this->saveResource($lang_config);
+		foreach($configs as $config) {
+			$this->saveResource($config);
+		}
 
-		new Language((new Config($this->getDataFolder() . $lang_config, Config::YAML))->getAll());
+		$config = new Config($this->getDataFolder() . "config.yml", Config::YAML);
+		$lang = $config->get("lang") . ".yml";
+		$this->saveResource($lang);
 
-		$env = new Environment([$this->getDataFolder() . ".env"]);
+		new Language(
+			(new Config($this->getDataFolder() . $lang, Config::YAML))->getAll()
+		);
+
+		$env = new Environment(
+			[$this->getDataFolder() . ".env"]
+		);
 
 		if(!$env->isOk()) {
 			$this->getLogger()->error(
