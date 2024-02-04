@@ -3,8 +3,9 @@
     <img src="title.png" alt="image or gif">
   </picture>
   <br>
-  <b>Plugin for performing actions for donations </b>
-  <img src="logo.png" width="7%" align="center">
+  <b>Plugin for performing actions for donations</b>
+  <br>
+  <img src="logo.png" width="15%" align="center">
 </div>
 
 ## 🧾 Description:
