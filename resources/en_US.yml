@@ -1,0 +1,8 @@
+loader.env_not_found: "The .env configuration file was not found"
+loader.token_failed: "The token failed verification"
+
+command.allow.success: "Actions for donations are allowed"
+command.disallow.success: "Actions for donations are disallowed"
+command.allow_or_disallow.description: "Allow or disallow actions for donations"
+
+notice.null: "..."
