@@ -26,11 +26,17 @@ class AllowDonates extends Command implements PluginOwned
 		$this->setPermission("de.al_or_dis");
 	}
 
+	/**
+	 * @return Loader
+	 */
 	public function getOwningPlugin(): Loader
 	{
 		return $this->loader;
 	}
 
+	/**
+	 * @return bool
+	 */
 	public function execute(CommandSender $sender, string $commandLabel, array $args): bool
 	{
 		if(DonateHandler::$cancel) {
