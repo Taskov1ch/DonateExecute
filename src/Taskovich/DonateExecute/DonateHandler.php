@@ -58,9 +58,7 @@ class DonateHandler
 						"subtitle" => $player->sendSubTitle($notice),
 						"actionbar" => $player->sendActionBarMessage($notice),
 						"message" => $player->sendMessage($notice),
-						default => {
-							continue;
-						},
+						default => continue,
 					};
 
 				foreach($commands[0] as $command) {
