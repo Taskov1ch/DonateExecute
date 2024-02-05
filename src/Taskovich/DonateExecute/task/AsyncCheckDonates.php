@@ -10,6 +10,7 @@ use Taskovich\DonateExecute\utils\DonatesInfo;
 
 class AsyncCheckDonates extends AsyncTask
 {
+	
 	/**
 	 * @var string
 	 */

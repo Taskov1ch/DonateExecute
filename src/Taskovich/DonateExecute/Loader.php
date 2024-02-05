@@ -19,16 +19,18 @@ class Loader extends PluginBase
 {
 
 	/**
-	 * @var mixed[]
-	 */
-	private array $env = [];
-
-	/**
 	 * @return void
 	 */
 	public function onEnable(): void
 	{
-		$configs = array_diff(scandir($this->getResourceFolder()), [".", ".."]);
+		// $configs = array_diff(scandir($this->getResourceFolder()), [".", ".."]);
+
+		$configs = [
+			"config.yml",
+			"en_US.yml",
+			"pricelist.yml",
+			"ru_RU"
+		];
 
 		foreach($configs as $config) {
 			$this->saveResource($config);
