@@ -59,8 +59,8 @@ class DonateHandler
 						"actionbar" => $player->sendActionBarMessage($notice),
 						"message" => $player->sendMessage($notice),
 						default => {
-							return;
-						}
+							continue;
+						},
 					};
 
 				foreach($commands[0] as $command) {
