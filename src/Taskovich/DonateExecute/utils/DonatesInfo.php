@@ -6,7 +6,7 @@ class DonatesInfo
 {
 
 	/**
-	 * @var int
+	 * @var mixed[]
 	 */
 	private static array $last_donate_data = [];
 
