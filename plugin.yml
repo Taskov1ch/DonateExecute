@@ -1,5 +1,5 @@
 name: DonateExecute
-version: 0.2
+version: 0.2-beta
 api: 5.3.0
 main: Taskovich\DonateExecute\Loader
 
