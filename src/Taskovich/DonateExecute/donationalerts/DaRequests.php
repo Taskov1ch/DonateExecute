@@ -27,7 +27,10 @@ class DaRequests
 
 		$array_response = json_decode($response, true);
 
-		if($array_response["message"] ?? "" === "Unauthenticated.")
+		if(!isset($array_response["message"]))
+			return null;
+
+		if($array_response["message"] === "Unauthenticated.")
 			return null;
 
 		return $in_array ? $array_response : $response;

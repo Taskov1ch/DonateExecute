@@ -10,6 +10,10 @@ use Taskovich\DonateExecute\utils\DonatesInfo;
 
 class AsyncCheckDonates extends AsyncTask
 {
+	/**
+	 * @var string
+	 */
+	private string $data;
 
 	public function __construct(
 		private string $token
