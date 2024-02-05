@@ -5,8 +5,6 @@
   <br>
   <b>Plugin for performing actions for donations</b>
   <br><br>
-  <img src="assets/logo.png" alt="Logo" width="10%" align="center">
-  <br><br>
   <a href="https://poggit.pmmp.io/p/DonateExecute"><img src="https://poggit.pmmp.io/shield.state/DonateExecute"></a>
 </div>
 
