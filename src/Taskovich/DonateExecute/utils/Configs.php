@@ -15,7 +15,7 @@ class Configs
 	private static Config $config;
 
 	/**
-	 * @var mixed[]
+	 * @var Config
 	 */
 	private static Config $pricelist;
 
