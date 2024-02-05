@@ -7,5 +7,5 @@ projects:
     path: example/ExamplePlugin/
   DonateExecute:
     path: ""
-    icon: icon.png
+    icon: logo.png
 ...
