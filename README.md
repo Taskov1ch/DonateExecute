@@ -1,11 +1,11 @@
 <div align="center">
   <picture>
-    <img src="assets/title.png" alt="Title">
+    <img src="title.png" alt="Title">
   </picture>
   <br>
   <b>Plugin for performing actions for donations</b>
   <br><br>
-  <img src="assets/logo.png" alt="Logo" width="10%" align="center">
+  <img src="logo.png" alt="Logo" width="10%" align="center">
 </div>
 
 ## 🧾 Description:
