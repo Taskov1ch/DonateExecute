@@ -21,7 +21,7 @@ Plugin for performing actions for donations. Some action will happen on the serv
 ## 📥 Installation:
 1. Install this plugin on the server.
 
-2. Create a `.env` file at the path `plugina_data/DomateExecute`.
+2. Create a `.env` file at the path `plugina_data/DonateExecute`.
 
 3. Open the previously created file in a text editor, and paste `token = your token` into it. *(`your token` replace with your **DonationAlerts API** token.)*
 
