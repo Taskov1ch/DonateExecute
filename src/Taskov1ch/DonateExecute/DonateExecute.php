@@ -11,6 +11,8 @@ use pocketmine\scheduler\TaskHandler;
 use pocketmine\utils\Config;
 use pocketmine\utils\SingletonTrait;
 use Symfony\Component\Filesystem\Path;
+use Taskov1ch\DonateExecute\commands\AllowDisallowDonates;
+use Taskov1ch\DonateExecute\commands\FakeDonate;
 use Taskov1ch\DonateExecute\donations\DonatesHandler;
 
 class DonateExecute extends PluginBase
@@ -31,35 +33,61 @@ class DonateExecute extends PluginBase
 
 		$this->donatesHandler = new DonatesHandler($this);
 
+		$this->saveResources();
 		$this->loadTranslations();
 		$this->loadPriceList();
+		$this->registerCommands();
 		$this->saveDefaultConfig();
 		$this->getServer()->getPluginManager()->registerEvents(new EventsListener($this), $this);
 	}
 
+	private function saveResources(): void
+	{
+		$dirs = ["", "languages"];
+		$resourceFolder = $this->getResourceFolder();
+
+		foreach ($dirs as $dir) {
+			$files = glob(Path::join($resourceFolder, $dir, "*.yml"));
+
+			foreach ($files as $file) {
+				$relativePath = str_replace($resourceFolder, "", $file);
+				$this->saveResource($relativePath);
+			}
+		}
+	}
+
 	private function loadTranslations(): void
 	{
+		$defaultLang = $this->getConfig()->get("default_language");
+		$files = glob(Path::join($this->getDataFolder(), "languages", "*.yml"));
 		$this->translator = new Translator($this);
 
-		$files = glob(Path::join($this->getResourceFolder(), "languages", "*.yml"));
-
 		foreach ($files as $file) {
-			$this->saveResource(Path::join("languages", $file));
-
-			$language = new Language($file,
-				(new Config(Path::join($this->getDataFolder(), "languages", $file)))->getAll()
+			$langName = basename($file, ".yml");
+			$lang = new Language($langName,
+				(new Config($file))->getAll()
 			);
 
-			$this->translator->registerLanguage($language);
-		}
+			$this->translator->registerLanguage($lang);
 
-		$this->translator->setDefaultLanguage($this->getConfig()->get("default_language"));
+			if ($langName === $defaultLang) {
+				$this->translator->setDefaultLanguage($lang);
+			}
+		}
 	}
 
 	private function loadPriceList(): void
 	{
 		$this->saveResource("pricelist.yml");
 		$this->pricelist = (new Config(Path::join($this->getDataFolder() . "pricelist.yml")))->getAll();
+	}
+
+	private function registerCommands(): void
+	{
+		$this->getServer()->getCommandMap()->registerAll("DonateExecute", [
+			new AllowDisallowDonates($this),
+			new FakeDonate($this)
+		]);
 	}
 
 	public function getTranslator(): Translator
@@ -111,7 +139,7 @@ class DonateExecute extends PluginBase
 		return $this->task !== null;
 	}
 
-	public function getDonateHandler(): DonatesHandler
+	public function getDonatesHandler(): DonatesHandler
 	{
 		return $this->donatesHandler;
 	}

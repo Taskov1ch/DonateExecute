@@ -29,7 +29,7 @@ class NewDonateEvent extends Event implements Cancellable
 		return $this->data["currency"];
 	}
 
-	public function getSenderName(): string
+	public function getSenderName(): ?string
 	{
 		return $this->data["username"];
 	}

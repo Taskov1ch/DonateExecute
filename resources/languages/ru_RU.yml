@@ -1,0 +1,14 @@
+name: "Русский (Russian)"
+
+donations.broken_token: "Токен не прошел проверку"
+donations.unknown_error: "Произошла неизвестная ошибка"
+
+command.allow_disallow.allowed: "Действия за донаты разрешены"
+command.allow_disallow.disallowed: "Действия за донаты запрешены"
+command.allow_disallow.description: "Разрешить или запретить действия за донаты"
+command.allow_disallow.anti_spam: "Пожалуйста, подождите перед использованием этой команды"
+
+command.fake_donate.description: "Симулировать донат"
+command.fake_donate.usage: "Использование: /fakedonate <сумма> <валюта> [от кого] [сообщение]"
+command.fake_donate.success: "Донат успешно симулирован"
+command.fake_donate.error: "Упс... Кажется, вы не верно ввели сумму :D"

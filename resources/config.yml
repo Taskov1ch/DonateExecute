@@ -12,3 +12,16 @@ allowed_players:
 
 # Delay between donations (in seconds)
 delay: 10
+
+# Allowed currencies
+allowed_currencies:
+  - RUB
+  - USD
+  - EUR
+  - BRL
+  - TRY
+  - PLN
+
+# Will be used in pricelist.yml if {sender} or {message} are empty.
+default_sender: "Anonymous"
+default_message: "..."

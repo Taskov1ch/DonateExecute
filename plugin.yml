@@ -6,5 +6,7 @@ author: Taskov1ch
 description: Donate = Execute command :D
 
 permissions:
-  de.al_or_dis:
+  donate_execute.allow_disallow_donates:
+    default: op
+  donate_execute.fake_donate:
     default: op

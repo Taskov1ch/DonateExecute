@@ -7,6 +7,7 @@ use pocketmine\scheduler\ClosureTask;
 use pocketmine\scheduler\TaskHandler;
 use pocketmine\Server;
 use Taskov1ch\DonateExecute\DonateExecute;
+use Taskov1ch\DonateExecute\events\NewDonateEvent;
 use Taskov1ch\DonateExecute\task\AsyncGetDonates;
 
 class DonatesHandler
@@ -70,14 +71,30 @@ class DonatesHandler
 	}
 
 
-	public function execute(): void {
-		$donate = array_shift($this->donates);
+	public function execute(?array $data = null): void {
+		$donate = $data ?? array_shift($this->donates);
 
-		$sum = $donate["amount"] + $donate["currency"];
-		$actions = $this->main->getPriceList()[$sum];
+		$event = new NewDonateEvent($donate);
+		$event->call();
 
-		$replacements = ["{amount}", "{currency}", "{message}", "{player}"];
-		$values = [$donate["amount"], $donate["currency"], $donate["message"], $donate["player"]];
+		if ($event->isCancelled()) {
+			return;
+		}
+
+		$sum = strval($donate["amount"]) . $donate["currency"];
+		$actions = $this->main->getPriceList()[$sum] ?? null;
+
+		if ($actions === null) {
+			return;
+		}
+
+		$replacements = ["{sender}", "{amount}", "{currency}", "{message}"];
+		$values = [
+			$donate["username"] ?? $this->main->getConfig()->get("default_sender"),
+			$donate["amount"],
+			$donate["currency"],
+			$donate["message"] ?? $this->main->getConfig()->get("default_message")
+		];
 
 		$actions["chat"] = array_map(
 			fn($msg) => str_replace($replacements, $values, $msg), $actions["chat"]
@@ -91,10 +108,12 @@ class DonatesHandler
 
 		foreach ($this->main->getPlayers() as $player) {
 			foreach ($actions["chat"] as $message) {
-				$player->sendMessage($message);
+				$message = str_replace("{player}", $player->getName(), $message);
+				$player->chat($message);
 			}
 
 			foreach ($actions["commands"] as $command) {
+				$command = str_replace("{player}", $player->getName(), $command);
 				$server->dispatchCommand(new ConsoleCommandSender($server, $server->getLanguage()), $command);
 			}
 		}

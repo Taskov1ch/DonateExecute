@@ -1,7 +1,0 @@
-donations.broken_token: "Токен не прошел проверку"
-donations.unknown_error: "Произошла неизвестная ошибка"
-
-command.allowed: "Действия за донаты разрешены"
-command.disallowed: "Действия за донаты запрешены"
-command.description: "Разрешить или запретить действия за донаты"
-command.anti_spam: "Пожалуйста, подождите перед использованием этой команды"
