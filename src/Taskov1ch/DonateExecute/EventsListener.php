@@ -1,32 +1,27 @@
 <?php
 
-namespace Taskovich\DonateExecute;
+namespace Taskov1ch\DonateExecute;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerQuitEvent;
 
-use Taskovich\DonateExecute\utils\Players;
-
-class EventListener implements Listener
+class EventsListener implements Listener
 {
 
-	/**
-	 * @return void
-	 */
+	public function __construct(private DonateExecute $main)
+	{}
+
 	public function onJoin(PlayerJoinEvent $event): void
 	{
 		$player = $event->getPlayer();
-		Players::checkAndAddPlayer($player);
+		$this->main->addPlayer($player);
 	}
 
-	/**
-	 * @return void
-	 */
 	public function onQuit(PlayerQuitEvent $event): void
 	{
 		$player = $event->getPlayer();
-		Players::checkAndRemovePlayer($player);
+		$this->main->removePlayer($player);
 	}
 
 }

@@ -1,7 +1,9 @@
 name: DonateExecute
-version: 0.2-beta
-api: 5.3.0
-main: Taskovich\DonateExecute\Loader
+version: 1
+api: 5.0.0
+main: Taskov1ch\DonateExecute\DonateExecute
+author: Taskov1ch
+description: Donate = Execute command :D
 
 permissions:
   de.al_or_dis:

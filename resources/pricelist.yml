@@ -4,22 +4,56 @@
 # {message} - Sender's message
 # {player} - Player nickname
 
-# <amount + currency>:
-#   - list of commands
-
 1RUB:
-  by_player:
-    - "say {sender} has asked for your permission :)"
-    - "op {sender}"
-  by_console: []
+  chat: # Message in chat
+    - "{sender} задонил мне 1 рубль, спасибо!" # Message from player in chat
+    - "/op {sender}" # Command from the player
+  commands: # Commands that will be on behalf of the console
+    - "title {player} title {amount}"
+    - "title {player} subtitle {currency}"
+    - "title {player} actionbar {message}"
 
-10RUB:
-  by_player: []
-  by_console:
-   - "kill {player}"
+1USD:
+  chat:
+    - "{sender} donated me 1 dollar, thank you!"
+    - "/op {sender}"
+  commands:
+    - "title {player} title {amount}"
+    - "title {player} subtitle {currency}"
+    - "title {player} actionbar {message}"
 
-1000RUB:
-  by_player:
-    - "say Now {sender} is the owner of the server!"
-  by_console:
-    - "op {sender}"
+1EUR:
+  chat:
+    - "{sender} m’a donné 1 euro, merci !"
+    - "/op {sender}"
+  commands:
+    - "title {player} title {amount}"
+    - "title {player} subtitle {currency}"
+    - "title {player} actionbar {message}"
+
+1BRL:
+  chat:
+    - "{sender} me doou 1 real, obrigado!"
+    - "/op {sender}"
+  commands:
+    - "title {player} title {amount}"
+    - "title {player} subtitle {currency}"
+    - "title {player} actionbar {message}"
+
+1TRY:
+  chat:
+    - "{sender} bana 1 lira bağışladı, teşekkür ederim!"
+    - "/op {sender}"
+  commands:
+    - "title {player} title {amount}"
+    - "title {player} subtitle {currency}"
+    - "title {player} actionbar {message}"
+
+1PLN:
+  chat:
+    - "{sender} przekazał mi 1 złoty, dziękuję!"
+    - "/op {sender}"
+  commands:
+    - "title {player} title {amount}"
+    - "title {player} subtitle {currency}"
+    - "title {player} actionbar {message}"

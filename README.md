@@ -1,1 +1,10 @@
-☠️ THE PROJECT IS NOT STABLE! THERE MAY BE BUGS OR CRITICAL ERRORS! ⚠️
+<div align="center">
+
+![Title](title.png)
+
+Donate = Execute command :D
+
+</div>
+
+## Краткое описание
+Вы ведь видели стримеров или ютуберов, у которых в мире происходил полный хаос при донате от зрителей?
