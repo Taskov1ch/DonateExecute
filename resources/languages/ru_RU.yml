@@ -1,7 +1,7 @@
 name: "Русский (Russian)"
 
 donations.broken_token: "Токен не прошел проверку"
-donations.unknown_error: "Произошла неизвестная ошибка"
+donations.unknown_error: "Произошла неизвестная ошибка: {error}"
 
 command.allow_disallow.allowed: "Действия за донаты разрешены"
 command.allow_disallow.disallowed: "Действия за донаты запрешены"

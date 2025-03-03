@@ -6,34 +6,44 @@ class Requests
 {
 	const URL = "https://www.donationalerts.com/api/v1/";
 
+	private array $headers;
+
 	public function __construct(private string $token)
-	{}
+	{
+		$this->headers = ["Authorization: Bearer " . $this->token];
+	}
 
 	public function getDonationList(): array
 	{
-		$headers = ["Authorization: Bearer " . $this->token];
 
 		$ch = curl_init(self::URL . "alerts/donations");
 
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers);
+		curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // For production, it's a really bad idea.
+		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false); // Maybe I'll fix it in the future, but for now, it stays this way.
 
 		$response = curl_exec($ch);
-		curl_close($ch);
+
 
 		if (!$response) {
-			return ["error" => "unknown_error"];
+			return ["error" => curl_error($ch)];
 		}
+
+		curl_close($ch);
 
 		$data = json_decode($response, true);
 
-		if (
-			isset($data["message"]) &&
-			$data["message"] === "Unauthenticated."
-		) {
-			return ["error" => "broken_token"];
+		if (isset($data["message"])) {
+			return ["error" => $data["message"] === "Unauthenticated." ? "broken_token" : $data["message"]];
 		}
 
-		return $data;
+		if (!isset($data["data"])) {
+			return ["error" => "Unknown Error"];
+		}
+
+		return $data["data"];
 	}
 }

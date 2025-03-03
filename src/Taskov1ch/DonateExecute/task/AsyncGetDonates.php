@@ -19,7 +19,7 @@ class AsyncGetDonates extends AsyncTask
 	public function onCompletion(): void
 	{
 		$data = $this->getResult();
-		DonateExecute::getInstance()->getDonatesHandler()->addDonates($data["data"]);
+		DonateExecute::getInstance()->getDonatesHandler()->addDonates($data);
 		DonateExecute::getInstance()->getDonatesHandler()->schedule();
 	}
 }

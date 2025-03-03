@@ -19,7 +19,7 @@ class DonateExecute extends PluginBase
 {
 	use SingletonTrait;
 
-	private ?TaskHandler $task;
+	private ?TaskHandler $task = null;
 	private DonatesHandler $donatesHandler;
 	private Translator $translator;
 
@@ -31,14 +31,22 @@ class DonateExecute extends PluginBase
 	{
 		self::setInstance($this);
 
-		$this->donatesHandler = new DonatesHandler($this);
-
 		$this->saveResources();
 		$this->loadTranslations();
 		$this->loadPriceList();
 		$this->registerCommands();
 		$this->saveDefaultConfig();
 		$this->getServer()->getPluginManager()->registerEvents(new EventsListener($this), $this);
+
+		$this->donatesHandler = new DonatesHandler($this);
+		$this->donatesHandler->prepare();
+
+		$this->startDonations();
+	}
+
+	public function onDisable(): void
+	{
+		$this->stopDonations();
 	}
 
 	private function saveResources(): void
@@ -114,7 +122,7 @@ class DonateExecute extends PluginBase
 			fn() => $this->donatesHandler->execute()
 		), 20 * $this->getConfig()->get("delay"));
 
-		$this->donatesHandler->schedule();
+		$this->donatesHandler->start();
 		$this->antiSpam = time() + 15;
 
 		return true;

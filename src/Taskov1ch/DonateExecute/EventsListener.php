@@ -23,5 +23,4 @@ class EventsListener implements Listener
 		$player = $event->getPlayer();
 		$this->main->removePlayer($player);
 	}
-
 }

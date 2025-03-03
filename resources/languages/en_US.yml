@@ -1,7 +1,7 @@
 name: "English (US)"
 
 donations.broken_token: "The token failed verification"
-donations.unknown_error: "An unknown error occurred"
+donations.unknown_error: "An unknown error occurred: {error}"
 
 command.allow_disallow.allowed: "Donations actions are allowed"
 command.allow_disallow.disallowed: "Donations actions are disallowed"

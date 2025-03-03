@@ -13,38 +13,58 @@ use Taskov1ch\DonateExecute\task\AsyncGetDonates;
 class DonatesHandler
 {
 	private array $donates = [];
-	private int $lastDonateId;
+	private int $lastDonateId = 0;
+	private ?TaskHandler $task = null;
 	private Requests $requests;
-	private TaskHandler $task;
+	private bool $stopTrigger = false;
 
 	public function __construct(private DonateExecute $main)
 	{
 		$this->requests = new Requests($main->getConfig()->get("token"));
 	}
 
-	public function checkToken(): void
+	public function prepare(): void
 	{
 		$donates = $this->requests->getDonationList();
 
-		if (isset($donates["error"])) {
+		if (isset($donates["error"]) || empty($donates)) {
 			$this->main->getLogger()->critical($this->main->getTranslator()->translate(
-				null, $donates["error"] === "broken_token" ? "donations.broken_token" : "donations.unknown_error"
+				null, ($donates["error"] ?? null) === "broken_token" ? "donations.broken_token" : "donations.unknown_error",
+				["error" => $donates["error"]]
 			));
-			$this->main->getServer()->getPluginManager()->disablePlugin($this->main);
+			Server::getInstance()->getPluginManager()->disablePlugin($this->main);
 			return;
+		}
+
+		if (!empty($donates)) {
+			$this->lastDonateId = $donates[0]["id"];
 		}
 	}
 
 	public function schedule(): void
 	{
-		$this->task = $this->main->getScheduler()->scheduleRepeatingTask(new ClosureTask(
+		$this->task?->remove();
+
+		if ($this->stopTrigger) {
+			return;
+		}
+
+		$this->task = $this->main->getScheduler()->scheduleDelayedTask(new ClosureTask(
 			fn() => $this->asyncGetDonations()
 		), 20 * 10);
 	}
 
+	public function start(): void
+	{
+		$this->stopTrigger = false;
+		$this->asyncGetDonations();
+	}
+
 	public function stop(): void
 	{
-		$this->task->remove();
+		$this->task?->remove();
+		$this->task = null;
+		$this->stopTrigger = true;
 	}
 
 	public function asyncGetDonations(): void
@@ -55,10 +75,9 @@ class DonatesHandler
 	public function addDonates(array $data): void
 	{
 		$newDonations = array_filter($data,
-			function ($donation) {
-				$sum = $donation["amount"] + $donation["currency"];
-				return $donation["id"] > $this->lastDonateId and
-					isset($this->main->getPriceList()[$sum]);
+			function(array $donation) {
+				$sum = $donation["amount"] . $donation["currency"];
+				return $donation["id"] > $this->lastDonateId && isset($this->main->getPriceList()[$sum]);
 			}
 		);
 
@@ -69,7 +88,6 @@ class DonatesHandler
 		$this->lastDonateId = $newDonations[0]["id"];
 		$this->donates = array_merge($this->donates, $newDonations);
 	}
-
 
 	public function execute(?array $data = null): void {
 		$donate = $data ?? array_shift($this->donates);

@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from donationalerts import DonationAlertsAPI, Scopes
 from dotenv import load_dotenv
-from flask import Flask, redirect, request, render_template_string, abort
+from flask import Flask, redirect, render_template_string, abort, request
 from os import getenv
 
 load_dotenv()
