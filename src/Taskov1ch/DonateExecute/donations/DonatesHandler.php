@@ -74,6 +74,10 @@ class DonatesHandler
 	public function execute(?array $data = null): void {
 		$donate = $data ?? array_shift($this->donates);
 
+		if (!$donate) {
+			return;
+		}
+
 		$event = new NewDonateEvent($donate);
 		$event->call();
 
