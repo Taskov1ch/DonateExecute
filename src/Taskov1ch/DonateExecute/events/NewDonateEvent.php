@@ -10,9 +10,9 @@ class NewDonateEvent extends Event implements Cancellable
 {
 	use CancellableTrait;
 
-
 	public function __construct(private array $data)
-	{}
+	{
+	}
 
 	public function getAllData(): array
 	{

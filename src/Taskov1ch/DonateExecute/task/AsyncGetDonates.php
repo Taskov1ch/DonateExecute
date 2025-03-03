@@ -8,7 +8,9 @@ use Taskov1ch\DonateExecute\DonateExecute;
 class AsyncGetDonates extends AsyncTask
 {
 
-	public function __construct(private string $serializedRequests) {}
+	public function __construct(private string $serializedRequests)
+	{
+	}
 
 	public function onRun(): void
 	{

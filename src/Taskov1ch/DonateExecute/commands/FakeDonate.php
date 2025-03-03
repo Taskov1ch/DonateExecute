@@ -25,7 +25,8 @@ class FakeDonate extends Command implements PluginOwned
 		return $this->main;
 	}
 
-	public function execute(CommandSender $sender, string $commandLabel, array $args): void {
+	public function execute(CommandSender $sender, string $commandLabel, array $args): void
+	{
 		if (count($args) < 2) {
 			$sender->sendMessage($this->translator->translate($sender, "command.fake_donate.usage"));
 			return;
@@ -55,5 +56,4 @@ class FakeDonate extends Command implements PluginOwned
 		]);
 		$sender->sendMessage($this->translator->translate($sender, "command.fake_donate.success"));
 	}
-
 }

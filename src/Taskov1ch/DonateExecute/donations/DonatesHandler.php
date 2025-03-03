@@ -29,7 +29,8 @@ class DonatesHandler
 
 		if (isset($donates["error"]) || empty($donates)) {
 			$this->main->getLogger()->critical($this->main->getTranslator()->translate(
-				null, ($donates["error"] ?? null) === "broken_token" ? "donations.broken_token" : "donations.unknown_error",
+				null,
+				($donates["error"] ?? null) === "broken_token" ? "donations.broken_token" : "donations.unknown_error",
 				["error" => $donates["error"]]
 			));
 			Server::getInstance()->getPluginManager()->disablePlugin($this->main);
@@ -50,7 +51,7 @@ class DonatesHandler
 		}
 
 		$this->task = $this->main->getScheduler()->scheduleDelayedTask(new ClosureTask(
-			fn() => $this->asyncGetDonations()
+			fn () => $this->asyncGetDonations()
 		), 20 * 10);
 	}
 
@@ -74,8 +75,9 @@ class DonatesHandler
 
 	public function addDonates(array $data): void
 	{
-		$newDonations = array_filter($data,
-			function(array $donation) {
+		$newDonations = array_filter(
+			$data,
+			function (array $donation) {
 				$sum = $donation["amount"] . $donation["currency"];
 				return $donation["id"] > $this->lastDonateId && isset($this->main->getPriceList()[$sum]);
 			}
@@ -89,7 +91,8 @@ class DonatesHandler
 		$this->donates = array_merge($this->donates, $newDonations);
 	}
 
-	public function execute(?array $data = null): void {
+	public function execute(?array $data = null): void
+	{
 		$donate = $data ?? array_shift($this->donates);
 
 		if (!$donate) {
@@ -119,11 +122,13 @@ class DonatesHandler
 		];
 
 		$actions["chat"] = array_map(
-			fn($msg) => str_replace($replacements, $values, $msg), $actions["chat"]
+			fn ($msg) => str_replace($replacements, $values, $msg),
+			$actions["chat"]
 		);
 
 		$actions["commands"] = array_map(
-			fn($cmd) => str_replace($replacements, $values, $cmd), $actions["commands"]
+			fn ($cmd) => str_replace($replacements, $values, $cmd),
+			$actions["commands"]
 		);
 
 		$server = Server::getInstance();

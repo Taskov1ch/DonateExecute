@@ -39,6 +39,5 @@ class AllowDisallowDonates extends Command implements PluginOwned
 		$sender->sendMessage(
 			$this->translator->translate($sender, $this->main->startDonations() ? "command.allow_disallow.allowed" : "command.allow_disallow.anti_spam")
 		);
-
 	}
 }

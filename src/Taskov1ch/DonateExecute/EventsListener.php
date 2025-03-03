@@ -10,7 +10,8 @@ class EventsListener implements Listener
 {
 
 	public function __construct(private DonateExecute $main)
-	{}
+	{
+	}
 
 	public function onJoin(PlayerJoinEvent $event): void
 	{

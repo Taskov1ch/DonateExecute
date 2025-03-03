@@ -27,7 +27,6 @@ class Requests
 
 		$response = curl_exec($ch);
 
-
 		if (!$response) {
 			return ["error" => curl_error($ch)];
 		}

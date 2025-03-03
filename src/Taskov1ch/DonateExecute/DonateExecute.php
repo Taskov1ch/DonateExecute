@@ -72,7 +72,8 @@ class DonateExecute extends PluginBase
 
 		foreach ($files as $file) {
 			$langName = basename($file, ".yml");
-			$lang = new Language($langName,
+			$lang = new Language(
+				$langName,
 				(new Config($file))->getAll()
 			);
 
@@ -119,7 +120,7 @@ class DonateExecute extends PluginBase
 		}
 
 		$this->task = $this->getScheduler()->scheduleRepeatingTask(new ClosureTask(
-			fn() => $this->donatesHandler->execute()
+			fn () => $this->donatesHandler->execute()
 		), 20 * $this->getConfig()->get("delay"));
 
 		$this->donatesHandler->start();
